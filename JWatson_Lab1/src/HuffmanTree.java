@@ -22,21 +22,28 @@ public class HuffmanTree {
         CreateFreqChar(chars);
         PrintFreqChart();
         FillQueue();
-        int size = queue.size();
-        for(int count = 0; count < size; count++){
-            if(count==0){
-                Node temp = queue.poll();
-                insert(root,null,temp);
-            }else{
-                Node temp = queue.poll();
-                insert(root,root,temp);
-            }
-        }
+        BuildTree();
         Printer p = new Printer();
         p.printNode(root);
 
 
 
+    }
+
+    private void BuildTree() {
+        int size = queue.size();
+        for(int count = 0; count < size; count++){
+            if(queue.size() > 1){
+                Node first = queue.poll();
+                Node second = queue.poll();
+                Node parent = new Node(first.getKey() + " " + second.getKey(), first.getValue() + second.getValue());
+                parent.setLeft(first);
+                parent.setRight(second);
+                queue.add(parent);
+            }else{
+                root = queue.poll();
+            }
+        }
     }
 
     private void FillQueue() {
