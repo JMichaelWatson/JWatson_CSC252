@@ -87,11 +87,11 @@ public class HuffmanTree {
     }
     private void CreateFreqChar(byte[] bytes) {
         for(byte b : bytes){
-            if(!freqChar.containsKey(b+"")){
-                freqChar.put(b+"",1.0);
+            if(!freqChar.containsKey(b+" ")){
+                freqChar.put(b+" ",1.0);
             }else{
-                double temp = freqChar.get(b+"");
-                freqChar.replace(b+"",temp + 1);
+                double temp = freqChar.get(b+" ");
+                freqChar.replace(b+" ",temp + 1);
             }
         }
     }
