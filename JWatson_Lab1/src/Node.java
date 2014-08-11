@@ -7,6 +7,7 @@ public class Node implements Comparable{
     private double value;
     private Node left;
     private Node right;
+    private Boolean isLeaf;
 
     public Node(String key, double value){
         this.key = key;
@@ -35,6 +36,14 @@ public class Node implements Comparable{
 
     public void setRight(Node right) {
         this.right = right;
+    }
+
+    public Boolean getIsLeaf() {
+        return isLeaf;
+    }
+
+    public void setIsLeaf(Boolean isLeaf) {
+        this.isLeaf = isLeaf;
     }
 
     public int compareTo(Object two) throws ClassCastException {
