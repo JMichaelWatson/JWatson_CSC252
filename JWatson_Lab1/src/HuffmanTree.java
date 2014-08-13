@@ -38,9 +38,15 @@ public class HuffmanTree {
 
     }
 
-    public byte toBytes(Bits bits){
-    //decompression
-        return decompress(root, bits);
+    public byte[] toBytes(Bits bits){
+        //decompression
+        byte[] bytes = new byte[100];
+        int index = 0;
+        while(bits.size() != 0){
+            bytes[index] = decompress(root, bits);
+            index++;
+        }
+        return bytes;
     }
 
     public void fromByte(byte b, Bits bits){
@@ -52,9 +58,9 @@ public class HuffmanTree {
     private void compression(Node current, byte b, Bits bits) {
              if(current != null){
                  if(!current.getIsLeaf()) {
-                     if (current.getKey().contains(b + "")) {
+                     if (current.getKey().contains(b + " ")) {
                          String leftKey = current.getLeftNode().getKey();
-                         if (leftKey.contains(b + "")) {
+                         if (leftKey.contains(b + " ")) {
                              bits.offer(false);
                              compression(current.getLeftNode(), b, bits);
                          } else {
