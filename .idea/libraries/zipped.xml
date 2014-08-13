@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="zipped">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JWatson_Lab1/zipped.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/JWatson_Lab1/zipped.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -12,6 +12,7 @@ public class Node implements Comparable{
     public Node(String key, double value){
         this.key = key;
         this.value = value;
+        this.isLeaf = false;
     }
 
     public String getKey() {

@@ -1,3 +1,5 @@
+import edu.neumont.io.Bits;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.PriorityQueue;
@@ -36,6 +38,51 @@ public class HuffmanTree {
 
     }
 
+    public byte toBytes(Bits bits){
+    //decompression
+        return decompress(root, bits);
+    }
+
+    public void fromByte(byte b, Bits bits){
+    //compression
+        compression(root, b, bits);
+
+    }
+
+    private void compression(Node current, byte b, Bits bits) {
+             if(current != null){
+                 if(!current.getIsLeaf()) {
+                     if (current.getKey().contains(b + "")) {
+                         String leftKey = current.getLeftNode().getKey();
+                         if (leftKey.contains(b + "")) {
+                             bits.offer(false);
+                             compression(current.getLeftNode(), b, bits);
+                         } else {
+                             bits.offer(true);
+                             compression(current.getRightNode(), b, bits);
+                         }
+                     }
+                 }
+             }
+    }
+
+    private byte decompress(Node current, Bits bits){
+        byte result = 0;
+        if(current != null){
+            if(!current.getIsLeaf()) {
+                boolean bit = bits.poll();
+                if (bit) {
+                    result += decompress(current.getRightNode(), bits);
+                }else {
+                    result +=  decompress(current.getLeftNode(), bits);
+                }
+            }else{
+                result = Byte.valueOf(current.getKey().split(" ")[0]);
+            }
+        }
+        return result;
+    }
+
     private void BuildTree() {
         int size = queue.size();
         for(int count = 0; count < size; count++){
@@ -64,8 +111,6 @@ public class HuffmanTree {
         }
     }
 
-
-
     private void PrintFreqChart() {
         Iterator<String> keySetIterator = freqChar.keySet().iterator();
 
@@ -85,6 +130,7 @@ public class HuffmanTree {
             }
         }
     }
+
     private void CreateFreqChar(byte[] bytes) {
         for(byte b : bytes){
             if(!freqChar.containsKey(b+" ")){
