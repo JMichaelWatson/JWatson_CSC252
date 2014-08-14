@@ -1,8 +1,6 @@
 import edu.neumont.io.Bits;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 
 /**
@@ -40,11 +38,14 @@ public class HuffmanTree {
 
     public byte[] toBytes(Bits bits){
         //decompression
-        byte[] bytes = new byte[100];
-        int index = 0;
+        List<Byte> result = new ArrayList<Byte>();
         while(bits.size() != 0){
-            bytes[index] = decompress(root, bits);
-            index++;
+            result.add(decompress(root, bits));
+        }
+        byte[] bytes = new byte[result.size()];
+        int size = result.size();
+        for(int count = 0; count < size; count++){
+            bytes[count] = result.remove(0);
         }
         return bytes;
     }

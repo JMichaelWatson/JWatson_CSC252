@@ -9,14 +9,14 @@ public class program {
         //char[] chars = {'a','a','a','a','a','b','b','c','c','c','c','c','c','d'};
         //String chars = "today_is_a_good_day_to_die";
         byte[] b = { -34, -24, -15,1 ,1 ,1 ,2 ,-109, -15, -34,-15, -34,-15, -34,-34 };
-        byte[] by = {-34};
-        byte[] bits ={1,1};// {1,1,0,1,0};//true, true, false, true, false (-34, 2)
+        byte[] by = {-34,2};
+        byte[] bits = {(byte)Integer.parseInt("11010000",2)};//true, true, false, true, false (-34, 2)
 
         HuffmanTree huffTree = new HuffmanTree(b);
         HuffmanCompressor compressor = new HuffmanCompressor();
         System.out.println("Compression:");
         String result="";
-        byte[] temp = compressor.compress(huffTree, by);
+       byte[] temp = compressor.compress(huffTree, by);
         for(int count = 0; count < temp.length; count++){
             result += temp[count]+"";
         }
@@ -24,13 +24,15 @@ public class program {
         result = "";
         System.out.println("Decompression");
         int count = 0;
-        for(byte bs : compressor.decompres(huffTree, bits.length, bits)){
+        for(byte bs : compressor.decompress(huffTree, bits.length, bits)){
             if(count < bits.length) {
-                result += bs + "";
+                result += bs + " ";
                 count++;
             }
         }
         System.out.println(result);
+
+        //old code
 //        huffTree.fromByte(by,bits);
 //        System.out.println(bits);
 //        Bits dbits = new Bits();

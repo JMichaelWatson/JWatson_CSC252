@@ -1,5 +1,7 @@
 import edu.neumont.io.Bits;
 
+import java.util.List;
+
 /**
  * Created by JMichael on 8/12/2014.
  */
@@ -18,23 +20,29 @@ public class HuffmanCompressor {
            if(counter < 8){
                if(bit){
                    newByte += "1";
+                   counter++;
                }else{
                    newByte += "0";
+                   counter++;
                }
            }else{
                counter = 0;
-               bytes[index] = Byte.valueOf(newByte);
+               bytes[index] = Byte.valueOf(newByte,2);
                newByte = "";
            }
        }
-        bytes[index] = Byte.valueOf(newByte);
+        while(newByte.length() < 8){
+            newByte+="0";
+        }
+        bytes[index] = (byte)Integer.parseInt(newByte,2);
+       // bytes[index] = Byte.valueOf(newByte,2);
         return bytes;
     }
 
-    public byte[] decompres(HuffmanTree tree, int uncompressedLength, byte[] b){
+    public byte[] decompress(HuffmanTree tree, int uncompressedLength, byte[] b){
         Bits bits = new Bits();
-        for(byte byt : b){
-            String converter = byt+"";
+        for(int count = 0; count < uncompressedLength; count++){
+            String converter = String.format("%8s", Integer.toBinaryString(b[count] & 0xFF)).replace(' ', '0');
             for(char c : converter.toCharArray()){
                 if(c == '1'){
                     bits.offer(true);
