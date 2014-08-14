@@ -41,10 +41,10 @@ public class HuffmanCompressor {
 
     public byte[] decompress(HuffmanTree tree, int uncompressedLength, byte[] b){
         Bits bits = new Bits();
-        for(int count = 0; count < uncompressedLength; count++){
+        for(int count = 0; count < b.length; count++){
             String converter = String.format("%8s", Integer.toBinaryString(b[count] & 0xFF)).replace(' ', '0');
-            for(char c : converter.toCharArray()){
-                if(c == '1'){
+            for(int counter = 0; counter < uncompressedLength; counter++){
+                if(converter.charAt(counter) == '1'){
                     bits.offer(true);
                 }else{
                     bits.offer(false);

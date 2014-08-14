@@ -84,7 +84,7 @@ public class HuffmanTree {
                     result +=  decompress(current.getLeftNode(), bits);
                 }
             }else{
-                result = Byte.valueOf(current.getKey().split(" ")[0]);
+                result = Byte.valueOf(current.getKey().replace(" ", ""));
             }
         }
         return result;

@@ -24,12 +24,12 @@ public class program {
         result = "";
         System.out.println("Decompression");
         int count = 0;
-        for(byte bs : compressor.decompress(huffTree, bits.length, bits)){
-            if(count < bits.length) {
-                result += bs + " ";
-                count++;
-            }
+        byte[] decompTemp = compressor.decompress(huffTree,5,bits);
+        for(byte bs : decompTemp){
+          result += bs + " ";
+          count++;
         }
+
         System.out.println(result);
 
         //old code
