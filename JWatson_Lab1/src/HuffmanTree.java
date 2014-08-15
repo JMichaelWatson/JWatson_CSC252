@@ -10,7 +10,7 @@ public class HuffmanTree {
 
     private Node root;
     private int freqcount;
-    private HashMap<Byte, Double> freqChar = new HashMap<Byte, Double>();
+    private Map<Byte, Double> freqChar = new TreeMap<Byte, Double>();
     private PriorityQueue<Node> queue = new PriorityQueue<Node>();
 
     public HuffmanTree(byte[] bytes){
@@ -25,7 +25,7 @@ public class HuffmanTree {
 //        BasicSetup();
 //    }
 
-    public HuffmanTree(HashMap<Byte,Double> freqChar){
+    public HuffmanTree(Map<Byte,Double> freqChar){
         freqcount = freqChar.size();
         this.freqChar = freqChar;
         BasicSetup();

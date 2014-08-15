@@ -37,7 +37,6 @@ public class HuffmanCompressor {
             newByte+="0";
         }
         bytes[index] = (byte)Integer.parseInt(newByte,2);
-       // bytes[index] = Byte.valueOf(newByte,2);
         return bytes;
     }
 
