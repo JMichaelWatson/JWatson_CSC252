@@ -16,9 +16,9 @@ public class HuffmanCompressor {
         int counter=0;
         int index = 0;
         String newByte ="";
-       for(boolean bit : bits) {
+       for(int count = 0; count < bits.size(); count++) {
            if(counter < 8){
-               if(bit){
+               if(bits.get(count)){
                    newByte += "1";
                    counter++;
                }else{
@@ -26,8 +26,10 @@ public class HuffmanCompressor {
                    counter++;
                }
            }else{
+               bytes[index] = (byte)Integer.parseInt(newByte,2);
+               count--;
                counter = 0;
-               bytes[index] = Byte.valueOf(newByte,2);
+               index++;
                newByte = "";
            }
        }
@@ -41,17 +43,20 @@ public class HuffmanCompressor {
 
     public byte[] decompress(HuffmanTree tree, int uncompressedLength, byte[] b){
         Bits bits = new Bits();
-        for(int count = 0; count < b.length; count++){
+           for(int count = 0; count < b.length; count++){
             String converter = String.format("%8s", Integer.toBinaryString(b[count] & 0xFF)).replace(' ', '0');
-            for(int counter = 0; counter < uncompressedLength; counter++){
-                if(converter.charAt(counter) == '1'){
+            for(char c : converter.toCharArray()){
+                if(c == '1'){
                     bits.offer(true);
                 }else{
                     bits.offer(false);
                 }
             }
         }
-
-        return tree.toBytes(bits);
+        byte[] bytes = new byte[uncompressedLength];
+        for(int count = 0; count < uncompressedLength; count++){
+            bytes[count]=tree.toByte(bits);
+        }
+        return bytes;
     }
 }

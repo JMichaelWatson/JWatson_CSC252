@@ -1,21 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by JMichael on 8/10/2014.
  */
 public class Node implements Comparable{
 
-    private String key;
+    private List<Byte> key = new ArrayList<Byte>();
     private double value;
     private Node left;
     private Node right;
     private Boolean isLeaf;
 
-    public Node(String key, double value){
-        this.key = key;
+    public Node (List<Byte> key, double value){
+        this.key.addAll(key);
+        this.value = value;
+        this.isLeaf = false;
+    }
+    public Node(byte key, double value){
+        this.key.add(key);
         this.value = value;
         this.isLeaf = false;
     }
 
-    public String getKey() {
+    public void addKey(byte Key){
+        this.key.add(Key);
+    }
+    public void addKey(List<Byte> key){
+        this.key.addAll(key);
+    }
+    public List<Byte> getKey() {
         return key;
     }
 
