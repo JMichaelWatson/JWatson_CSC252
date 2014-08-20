@@ -27,18 +27,25 @@ public class AVLTree <T extends Comparable>{
 
     private boolean insert(Node currentNode, Node parent, T value){
         boolean isInserted = false;
-        if(root == null){
-            if(parent == null){
-                this.root = new Node(value);
-            }
+        if(currentNode == null && parent == null){
+            this.root = new Node(value);
         }else if(currentNode == null){
-            if(value.compareTo(parent.value()) < 0){
-                parent.left(new Node(value));
-            }else{
-                parent.right(new Node(value));
+            currentNode = new Node(value);
+            if(parent.value().compareTo(currentNode.value())<0){
+                if(parent.right() == null){
+                    parent.right(currentNode);
+                }else{
+                    insert(parent.right(), parent, value);
+                }
+            }else if(parent.value().compareTo(currentNode.value())>0) {
+                if (parent.left() == null) {
+                    parent.left(currentNode);
+                } else {
+                    insert(parent.left(), parent, value);
+                }
             }
         }else{
-            if(value.compareTo(parent.value()) < 0){
+            if(value.compareTo(currentNode.value()) < 0){
                 insert(currentNode.left(), currentNode, value);
             }else{
                 insert(currentNode.right(), currentNode, value);
