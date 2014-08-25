@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Created by JMichael on 8/18/2014.
  */
@@ -68,7 +70,7 @@ public class Program {
 //        avl.offer(4);
 //        avl.offer(5);
 //size test
-        avl.offer(4);
+        /*avl.offer(4);
         avl.offer(3);
         avl.offer(6);
         avl.offer(5);
@@ -86,10 +88,19 @@ public class Program {
         avl.offer(50);
         avl.offer(40);
         avl.offer(43);
-        avl.offer(25);
+        avl.offer(25);*/
 
-
+    for ( int i = 0; i < 128; i++ ) {
+        int value = new Random().nextInt(50);
+        System.out.println("About to insert: " + value);
+        avl.offer(value);
         avl.print();
+        System.out.println(avl.size());
+
+    }
+
+
+//        avl.print();
         System.out.println(avl.size());
 
     }

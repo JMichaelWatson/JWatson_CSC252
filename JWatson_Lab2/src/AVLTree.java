@@ -90,11 +90,14 @@ public class AVLTree<T extends Comparable<T>> {
                 } else {
                     insert(parent.left(), parent, value);
                 }
+            }else{
+
+                //dup
             }
         } else {
             if (value.compareTo(currentAVLNode.value()) < 0) {
                 insert(currentAVLNode.left(), currentAVLNode, value);
-            } else {
+            } else if(value.compareTo(currentAVLNode.value()) > 0){
                 insert(currentAVLNode.right(), currentAVLNode, value);
             }
         }

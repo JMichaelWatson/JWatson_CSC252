@@ -12,8 +12,8 @@ public class HuffmanTree {
     private int freqcount;
     private Map<Byte, Double> freqChar = new TreeMap<Byte, Double>();
 //    private PriorityQueue<Node> queue = new PriorityQueue<Node>();
-    private HeadBasedPriorityQueue<Node> queue = new HeadBasedPriorityQueue<Node>(257);
-//    private AVLBasedPriorityQueue<Node> queue = new AVLBasedPriorityQueue<Node>();
+//    private HeadBasedPriorityQueue<Node> queue = new HeadBasedPriorityQueue<Node>(257);
+    private AVLBasedPriorityQueue<Node> queue = new AVLBasedPriorityQueue<Node>();
 
     public HuffmanTree(byte[] bytes){
         freqcount=bytes.length;
