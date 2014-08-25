@@ -11,19 +11,15 @@ public class HuffmanTree {
     private Node root;
     private int freqcount;
     private Map<Byte, Double> freqChar = new TreeMap<Byte, Double>();
-    private PriorityQueue<Node> queue = new PriorityQueue<Node>();
+//    private PriorityQueue<Node> queue = new PriorityQueue<Node>();
+    private HeadBasedPriorityQueue<Node> queue = new HeadBasedPriorityQueue<Node>(257);
+//    private AVLBasedPriorityQueue<Node> queue = new AVLBasedPriorityQueue<Node>();
 
     public HuffmanTree(byte[] bytes){
         freqcount=bytes.length;
         CreateFreqChar(bytes);
         BasicSetup();
     }
-
-//    public HuffmanTree(char[] chars){
-//        freqcount=chars.length;
-//        CreateFreqChar(chars);
-//        BasicSetup();
-//    }
 
     public HuffmanTree(Map<Byte,Double> freqChar){
         freqcount = freqChar.size();
@@ -46,8 +42,7 @@ public class HuffmanTree {
 //        PrintFreqChart();
         FillQueue();
         BuildTree();
-//        Printer p = new Printer();
-//        p.printNode(root);
+//        PrintTree();
     }
 
     private void compression(Node current, byte b, Bits bits) {
@@ -71,7 +66,7 @@ public class HuffmanTree {
         byte result = 0;
         if(current != null){
             if(bits.size() <=0)
-                System.out.println(current.getKey());
+                System.out.println("ERROR: " + current.getKey());
             else {
                 if (!current.getIsLeaf()) {
                     boolean bit = bits.poll();
@@ -95,11 +90,12 @@ public class HuffmanTree {
             if(queue.size() > 1){
                 Node first = queue.poll();
                 Node second = queue.poll();
-                Node parent = new Node(first.getKey(), first.getValue() + second.getValue());
-                parent.addKey(second.getKey());
-                parent.setLeft(first);
-                parent.setRight(second);
-                queue.add(parent);
+                    Node parent = new Node(first.getKey(), first.getValue() + second.getValue());
+                    parent.addKey(second.getKey());
+                    parent.setLeft(first);
+                    parent.setRight(second);
+                    queue.offer(parent);
+//                    System.out.println("Parent Key: " + parent.getKey());
             }else{
                 root = queue.poll();
             }
@@ -113,37 +109,25 @@ public class HuffmanTree {
             byte key = keySetIterator.next();
             Node temp = new Node(key,freqChar.get(key)/freqcount);
             temp.setIsLeaf(true);
-            queue.add(temp);
-//            System.out.println("Inserted Node: " + temp.getKey());
+            queue.offer(temp);
+//            System.out.println("Inserted AVLNode: " + temp.getKey());
         }
     }
 
     private void PrintFreqChart() {
         Iterator<Byte> keySetIterator = freqChar.keySet().iterator();
-
         while(keySetIterator.hasNext()){
             byte key = keySetIterator.next();
             System.out.println("key: " + key + " value: " + freqChar.get(key));
         }
     }
 
-//    private void CreateFreqChar(char[] chars) {
-//        for(char c : chars){
-//            if(!freqChar.containsKey(c+"")){
-//                freqChar.put(c+"",1.0);
-//            }else{
-//                double temp = freqChar.get(c+"");
-//                freqChar.replace(c+"",temp + 1);
-//            }
-//        }
-//    }
-
     private void CreateFreqChar(byte[] bytes) {
         for(byte b : bytes){
-            if(!freqChar.containsKey(b+" ")){
+            if(!freqChar.containsKey(b)){
                 freqChar.put(b,1.0);
             }else{
-                double temp = freqChar.get(b+" ");
+                double temp = freqChar.get(b);
                 freqChar.replace(b,temp + 1);
             }
         }

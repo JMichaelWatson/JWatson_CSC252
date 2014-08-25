@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/InClassGraphs/InClassGraphs.iml" filepath="$PROJECT_DIR$/InClassGraphs/InClassGraphs.iml" />
       <module fileurl="file://$PROJECT_DIR$/JWatson_Lab1/JWatson_Lab1.iml" filepath="$PROJECT_DIR$/JWatson_Lab1/JWatson_Lab1.iml" />
       <module fileurl="file://$PROJECT_DIR$/JWatson_Lab2/JWatson_Lab2.iml" filepath="$PROJECT_DIR$/JWatson_Lab2/JWatson_Lab2.iml" />
     </modules>

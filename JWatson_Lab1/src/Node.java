@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Created by JMichael on 8/10/2014.
  */
-public class Node implements Comparable{
+public class Node implements Comparable<Node> {
 
     private List<Byte> key = new ArrayList<Byte>();
     private double value;
@@ -12,11 +12,12 @@ public class Node implements Comparable{
     private Node right;
     private Boolean isLeaf;
 
-    public Node (List<Byte> key, double value){
+    public Node(List<Byte> key, double value){
         this.key.addAll(key);
         this.value = value;
         this.isLeaf = false;
     }
+
     public Node(byte key, double value){
         this.key.add(key);
         this.value = value;
@@ -26,9 +27,11 @@ public class Node implements Comparable{
     public void addKey(byte Key){
         this.key.add(Key);
     }
+
     public void addKey(List<Byte> key){
         this.key.addAll(key);
     }
+
     public List<Byte> getKey() {
         return key;
     }
@@ -61,11 +64,10 @@ public class Node implements Comparable{
         this.isLeaf = isLeaf;
     }
 
-    public int compareTo(Object two) throws ClassCastException {
-        Node tempNode = (Node)two;
-        if(value < tempNode.getValue()){
+    public int compareTo(Node two) throws ClassCastException {
+        if(value < two.getValue()){
             return -1;
-        }else if(this.value == tempNode.getValue()){
+        }else if(this.value == two.getValue()){
             return 0;
         }else{
             return 1;

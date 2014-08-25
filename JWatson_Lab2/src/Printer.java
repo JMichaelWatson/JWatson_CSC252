@@ -7,13 +7,13 @@ import java.util.List;
 
 public class Printer {
 
-    public static <T extends Comparable<?>> void printNode(Node root) {
+    public static <T extends Comparable<?>> void printNode(AVLNode root) {
         int maxLevel = Printer.maxLevel(root);
         printNodeInternal(Collections.singletonList(root), 1, maxLevel);
     }
 
-    private static <T extends Comparable<?>> void printNodeInternal(List<Node> nodes, int level, int maxLevel) {
-        if (nodes.isEmpty() || Printer.isAllElementsNull(nodes)){
+    private static <T extends Comparable<?>> void printNodeInternal(List<AVLNode> AVLNodes, int level, int maxLevel) {
+        if (AVLNodes.isEmpty() || Printer.isAllElementsNull(AVLNodes)){
             return;
         }
 
@@ -24,15 +24,15 @@ public class Printer {
 
         Printer.printWhitespaces(firstSpaces);
 
-        List<Node> newNodes = new ArrayList<Node>();
-        for (Node node : nodes) {
-            if (node != null) {
-                System.out.print(node.value());
-                newNodes.add(node.left());
-                newNodes.add(node.right());
+        List<AVLNode> newAVLNodes = new ArrayList<AVLNode>();
+        for (AVLNode AVLNode : AVLNodes) {
+            if (AVLNode != null) {
+                System.out.print(AVLNode.value());
+                newAVLNodes.add(AVLNode.left());
+                newAVLNodes.add(AVLNode.right());
             } else {
-                newNodes.add(null);
-                newNodes.add(null);
+                newAVLNodes.add(null);
+                newAVLNodes.add(null);
                 System.out.print(" ");
             }
 
@@ -41,14 +41,14 @@ public class Printer {
         System.out.println("");
 
         for (int i = 1; i <= endgeLines; i++) {
-            for (int j = 0; j < nodes.size(); j++) {
+            for (int j = 0; j < AVLNodes.size(); j++) {
                 Printer.printWhitespaces(firstSpaces - i);
-                if (nodes.get(j) == null) {
+                if (AVLNodes.get(j) == null) {
                     Printer.printWhitespaces(endgeLines + endgeLines + i + 1);
                     continue;
                 }
 
-                if (nodes.get(j).left() != null){
+                if (AVLNodes.get(j).left() != null){
                     System.out.print("/");
                 }
                 else{
@@ -57,7 +57,7 @@ public class Printer {
 
                 Printer.printWhitespaces(i + i - 1);
 
-                if (nodes.get(j).right() != null){
+                if (AVLNodes.get(j).right() != null){
                     System.out.print("\\");
                 }
                 else{
@@ -67,7 +67,7 @@ public class Printer {
             }
             System.out.println("");
         }
-        printNodeInternal(newNodes, level + 1, maxLevel);
+        printNodeInternal(newAVLNodes, level + 1, maxLevel);
     }
 
     private static void printWhitespaces(int count) {
@@ -75,11 +75,11 @@ public class Printer {
             System.out.print(" ");
     }
 
-    private static <T extends Comparable<?>> int maxLevel(Node node) {
-        if (node == null){
+    private static <T extends Comparable<?>> int maxLevel(AVLNode AVLNode) {
+        if (AVLNode == null){
             return 0;
         }
-        return Math.max(Printer.maxLevel(node.left()), Printer.maxLevel(node.right())) + 1;
+        return Math.max(Printer.maxLevel(AVLNode.left()), Printer.maxLevel(AVLNode.right())) + 1;
     }
 
     private static <T> boolean isAllElementsNull(List<T> list) {

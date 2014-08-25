@@ -7,8 +7,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="zipped" level="project" />
-    <orderEntry type="module" module-name="JWatson_Lab2" />
   </component>
 </module>
 

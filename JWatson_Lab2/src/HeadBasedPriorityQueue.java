@@ -15,54 +15,118 @@ public class HeadBasedPriorityQueue<T extends Comparable> {
         tailIndex = 1;
     }
 
-    public boolean offer(T data){
-        if(queue.length == maxLenght){
+    public HeadBasedPriorityQueue(int maxLenght) {
+        this.maxLenght = maxLenght;
+        tailIndex = 1;
+        queue = (T[]) new Comparable[maxLenght];
+    }
+
+    //returns the head
+    public T poll() {
+        T temp = queue[1];
+        queue[1] = queue[tailIndex - 1];
+        queue[tailIndex - 1] = temp;
+        tailIndex--;
+        tHeapify();
+        return temp;
+    }
+//    public T poll() {
+//        if (tailIndex - 1 > 0) {
+//            int temp = 1;
+//            for (int index = 2; index < tailIndex - 1; index++) {
+//                if (queue[temp].compareTo(queue[index]) > 0){
+//                    temp = index;
+//                }
+//            }
+//            //swap
+//            T tempNode = queue[temp];
+//            queue[temp] = queue[tailIndex - 1];
+//            queue[tailIndex - 1] = tempNode;
+//            tailIndex--;
+//            //heapify
+//            heapify();
+//            return tempNode;
+//        }
+//        return null;
+//    }
+
+    public int size() {
+        return tailIndex - 1;
+    }
+
+    public boolean offer(T data) {
+        if (tailIndex == maxLenght) {
             maxLenght *= 2;
             T[] newQueue = (T[]) new Comparable[maxLenght];
-            for(int count = 1; count < queue.length; count++){
+            for (int count = 1; count < queue.length; count++) {
                 newQueue[count] = queue[count];
             }
             queue = newQueue;
         }
-        queue[tailIndex] = data;
+        queue[tailIndex++] = data;
         heapify();
-        tailIndex++;
         return true;
     }
 
-    public T peek(){
+    public T peek() {
         return queue[1];
     }
 
-    private void heapify(){
+    private void heapify() {
         //sort the last index to the right spot
-        int parent = tailIndex / 2;
-        while (parent != 0) {
-            if (queue[tailIndex].compareTo(queue[parent]) > 0) {
+        int parent = (tailIndex - 1) / 2;
+        int count = 1;
+        while (parent > 0) {
+            if (queue[tailIndex - count].compareTo(queue[parent]) < 0) {
                 T temp = queue[parent];
-                queue[parent] = queue[tailIndex];
-                queue[tailIndex] = temp;
-                parent = tailIndex / 2 - 1;
-            }else{
-                parent = 0;
-            }
+                queue[parent] = queue[tailIndex - count];
+                queue[tailIndex - count] = temp;
 
+            }
+            parent = (tailIndex - ++count) / 2;
         }
     }
 
-    public String print(){
-        String result = "";
-        for(T t : queue){
-            if(t != null) {
-                result += t + " ";
+    private void tHeapify() {
+        int parent = 1;
+        while(parent<(tailIndex-1)/2){
+            int left = parent*2;
+            int right = parent*2+1;
+            if(queue[left].compareTo(queue[right])<0){
+                if(queue[parent].compareTo(queue[left])>0){
+                    T temp = queue[parent];
+                    queue[parent] = queue[left];
+                    queue[left]= temp;
+                }else  if(queue[parent].compareTo(queue[right])>0){
+                    T temp = queue[parent];
+                    queue[parent] = queue[right];
+                    queue[right]= temp;
+                }
+            }else{
+                if(queue[parent].compareTo(queue[right])>0){
+                    T temp = queue[parent];
+                    queue[parent] = queue[right];
+                    queue[right]= temp;
+                }else  if(queue[parent].compareTo(queue[left])>0){
+                    T temp = queue[parent];
+                    queue[parent] = queue[left];
+                    queue[left]= temp;
+                }
             }
+            parent++;
+        }
+    }
+
+    public String print() {
+        String result = "";
+        for (int index = 1; index < tailIndex; index++) {
+            result += queue[index] + " ";
         }
         return result;
     }
 
 
 }
-
 
 
 //for(int x =(tailIndex-1)/2 ; x > 0; x--) {

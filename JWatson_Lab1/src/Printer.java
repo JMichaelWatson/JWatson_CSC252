@@ -12,8 +12,8 @@ public class Printer {
         printNodeInternal(Collections.singletonList(root), 1, maxLevel);
     }
 
-    private static <T extends Comparable<?>> void printNodeInternal(List<Node> nodes, int level, int maxLevel) {
-        if (nodes.isEmpty() || Printer.isAllElementsNull(nodes)){
+    private static <T extends Comparable<?>> void printNodeInternal(List<Node> Nodes, int level, int maxLevel) {
+        if (Nodes.isEmpty() || Printer.isAllElementsNull(Nodes)){
             return;
         }
 
@@ -24,15 +24,15 @@ public class Printer {
 
         Printer.printWhitespaces(firstSpaces);
 
-        List<Node> newNodes = new ArrayList<Node>();
-        for (Node node : nodes) {
+        List<Node> newNode = new ArrayList<Node>();
+        for (Node node : Nodes) {
             if (node != null) {
                 System.out.print(node.getKey());
-                newNodes.add(node.getLeftNode());
-                newNodes.add(node.getRightNode());
+                newNode.add(node.getLeftNode());
+                newNode.add(node.getRightNode());
             } else {
-                newNodes.add(null);
-                newNodes.add(null);
+                newNode.add(null);
+                newNode.add(null);
                 System.out.print(" ");
             }
 
@@ -41,14 +41,14 @@ public class Printer {
         System.out.println("");
 
         for (int i = 1; i <= endgeLines; i++) {
-            for (int j = 0; j < nodes.size(); j++) {
+            for (int j = 0; j < Nodes.size(); j++) {
                 Printer.printWhitespaces(firstSpaces - i);
-                if (nodes.get(j) == null) {
+                if (Nodes.get(j) == null) {
                     Printer.printWhitespaces(endgeLines + endgeLines + i + 1);
                     continue;
                 }
 
-                if (nodes.get(j).getLeftNode() != null){
+                if (Nodes.get(j).getLeftNode() != null){
                     System.out.print("/");
                 }
                 else{
@@ -57,7 +57,7 @@ public class Printer {
 
                 Printer.printWhitespaces(i + i - 1);
 
-                if (nodes.get(j).getRightNode() != null){
+                if (Nodes.get(j).getRightNode() != null){
                     System.out.print("\\");
                 }
                 else{
@@ -67,7 +67,7 @@ public class Printer {
             }
             System.out.println("");
         }
-        printNodeInternal(newNodes, level + 1, maxLevel);
+        printNodeInternal(newNode, level + 1, maxLevel);
     }
 
     private static void printWhitespaces(int count) {
