@@ -17,6 +17,7 @@ public class DfsGraphTraversal {
 
     private List<Integer> DFS(Graph g, int v) {
         List<Integer> dfs = new ArrayList<Integer>();
+        g.setColor(v,1);
         for (int w = g.first(v); w < g.vcount(); w = g.next(v, w)) {
             if (g.getColor(w) == 0) {
                 dfs.addAll(DFS(g, w));
