@@ -12,6 +12,12 @@ public class Graph {
         color = new int[v];
     }
 
+    public void resetColor(){
+        for(int v = 0; v < size; v++){
+            setColor(v,0);
+        }
+    }
+
     //iterate through neighbors
     //  first(int) exmaple first(3) return 4th
     //  next(next next); example next(3,4) return the next neighbor after 4 if no next neighbor return 4
@@ -31,7 +37,7 @@ public class Graph {
     }
 
     public int next(int vertex, int lastVisitedNeighbor) {
-        for (int count = lastVisitedNeighbor; count < vcount(); count++) {
+        for (int count = lastVisitedNeighbor + 1; count < vcount(); count++) {
             if (edges[vertex][count] != 0) {
                 return count;
             }
@@ -39,9 +45,15 @@ public class Graph {
         return vcount();
     }
 
+
     //CRUD Edges
 
-    public void addEgde(int fromVertex, int toVertex, int weight) {
+    public void addBiEgde(int fromVertex, int toVertex, int weight) {
+        edges[fromVertex][toVertex] = weight;
+        edges[toVertex][fromVertex] = weight;
+    }
+
+    public void addEgde(int fromVertex, int toVertex, int weight){
         edges[fromVertex][toVertex] = weight;
     }
 
@@ -63,6 +75,19 @@ public class Graph {
         this.color[vertex] = color;
     }
 
+
+    public void printAdjMatrix(){
+        System.out.println("------------------------------------------------");
+        System.out.println("Matrix:");
+       for(int x = 0; x < size; x ++){
+           String result = "";
+           for(int y = 0; y < size; y++){
+               result += edges[x][y] + " ";
+           }
+           System.out.println(result);
+       }
+        System.out.println("------------------------------------------------");
+    }
     //for(int curr = first(vertex); curr < vcount(); curr = next(vertex, curr){}
     //for bfs dfs algos
 
