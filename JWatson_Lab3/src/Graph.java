@@ -18,6 +18,7 @@ public class Graph {
         }
     }
 
+
     //iterate through neighbors
     //  first(int) exmaple first(3) return 4th
     //  next(next next); example next(3,4) return the next neighbor after 4 if no next neighbor return 4
@@ -36,7 +37,7 @@ public class Graph {
         return vcount();
     }
 
-    public int next(int vertex, int lastVisitedNeighbor) {
+    public int next(int vertex,  int lastVisitedNeighbor) {
         for (int count = lastVisitedNeighbor + 1; count < vcount(); count++) {
             if (edges[vertex][count] != 0) {
                 return count;
