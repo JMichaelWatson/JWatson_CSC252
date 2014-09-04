@@ -74,16 +74,22 @@ public class StringAndCoins {
 
     public int checkCapture(int fromVertex, int toVertex) {
         int isCaptured = 0;
+        int count = 0;
         for (int i = 0; i < strings.length; i++) {
             if (strings[fromVertex][i] != 0) {
-                isCaptured++;
+                count++;
             }
         }
+        if (count <= 0)
+            isCaptured++;
+        count = 0;
         for (int i = 0; i < strings.length; i++) {
             if (strings[toVertex][i] != 0) {
-                isCaptured++;
+                count++;
             }
         }
+        if (count <= 0)
+            isCaptured++;
         return isCaptured;
     }
 
@@ -94,9 +100,10 @@ public class StringAndCoins {
                 int count = neighborCount(i);
                 if (count == 1 && neighborCount(first(i)) == 1) {
                     total++;
+                    color[i] = 1;
+                    color[first(i)] = 1;
                 }
-                color[i] = 1;
-                color[first(i)] = 1;
+
             }
         }
         ResetColor();

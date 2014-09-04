@@ -40,18 +40,18 @@ public class Program {
 
 
         DotsAndBoxes dotsAndBoxes = new DotsAndBoxes(3,3);
-        //dotsAndBoxes.print();
+        dotsAndBoxes.print();
         System.out.println("NORMAL TOP DOWN");
-        dotsAndBoxes.drawLine(2,1,1,1,2);//normal top down
+        dotsAndBoxes.drawLine(1,1,1,1,2);//normal top down
         dotsAndBoxes.print();
         System.out.println("NORMAL LEFT TO RIGHT");
-        dotsAndBoxes.drawLine(6,1,0,2,0);//normal left right
+        dotsAndBoxes.drawLine(0,1,0,2,0);//normal left right
         dotsAndBoxes.print();
         System.out.println("BOTTOM UP");
-        dotsAndBoxes.drawLine(2,2,2,2,1);//bottom up
+        dotsAndBoxes.drawLine(0,2,2,2,1);//bottom up
         dotsAndBoxes.print();
         System.out.println("RIGHT TO LEFT");
-        dotsAndBoxes.drawLine(6,2,1,1,1);//right to left
+        dotsAndBoxes.drawLine(1,2,1,1,1);//right to left
         dotsAndBoxes.print();
     }
 }
