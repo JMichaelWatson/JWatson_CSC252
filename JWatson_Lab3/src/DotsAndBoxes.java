@@ -6,6 +6,7 @@ public class DotsAndBoxes  {
     Graph graph;
     StringAndCoins stringAndCoins;
     int gameSize;
+    int scores[] = new int[2];
 
 
     public DotsAndBoxes(int rows, int columns){
@@ -44,7 +45,9 @@ public class DotsAndBoxes  {
             stringAndCoins.addBiEdge(sFromVertex,  sToVertex,0);
         }
         //return if the score if any
-        return 0;
+        int sco =stringAndCoins.checkCapture(sFromVertex,sToVertex);
+        scores[player] += sco;
+        return sco;
     }
 
     private int horizontal(int player, int x1, int y1, int x2, int y2){
@@ -58,27 +61,29 @@ public class DotsAndBoxes  {
             stringAndCoins.addBiEdge(sFromVertex,  sToVertex,0);
         }
         //return if the score if any
-        return 0;
+        int sco =stringAndCoins.checkCapture(sFromVertex,sToVertex);
+        scores[player] += sco;
+        return sco;
     }
 
     public int score(int player){
-        return 0;
+        return scores[player];
     }
 
     public boolean anyMovesLeft(){
-        return false;
+        return stringAndCoins.anyMovesLeft();
     }
 
     public int countDoubleCrosses(){
-        return 0;
+        return stringAndCoins.countDoubleCross();
     }
 
     public int countCycles(){
-        return 0;
+        return stringAndCoins.countCycles();
     }
 
     public int countOpenChains(){
-        return 0;
+        return stringAndCoins.countOpenChains();
     }
 
     //testing purpose only
@@ -88,4 +93,9 @@ public class DotsAndBoxes  {
         System.out.println("String and Coins");
         stringAndCoins.printAdjMatrix();
     }
+
+
+
+
+
 }

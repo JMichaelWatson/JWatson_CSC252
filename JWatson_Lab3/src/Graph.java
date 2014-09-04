@@ -53,6 +53,17 @@ public class Graph {
         edges[fromVertex][toVertex] = weight;
         edges[toVertex][fromVertex] = weight;
     }
+    public boolean anyMovesLeft(){
+        boolean isMoves = false;
+        for(int i = 0; i < edges.length; i++){
+            for(int j = 0; j < edges.length; j++){
+                if(isEdge(i,j)){
+                    isMoves = true;
+                }
+            }
+        }
+        return isMoves;
+    }
 
     public void addEgde(int fromVertex, int toVertex, int weight){
         edges[fromVertex][toVertex] = weight;
