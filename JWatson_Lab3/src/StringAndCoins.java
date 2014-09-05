@@ -1,4 +1,5 @@
 import com.sun.org.glassfish.external.statistics.annotations.Reset;
+import sun.nio.cs.ext.ISCII91;
 
 /**
  * Created by JMichael on 8/29/2014.
@@ -72,30 +73,22 @@ public class StringAndCoins {
     }
 
 
-    public int checkCapture(int fromVertex, int toVertex) {
+    public int checkCapture(int fromVertex, int toVertex, int y1, int y2) {
         int isCaptured = 0;
-        int count = 0;
-        for (int i = 0; i < strings.length; i++) {
-            if (strings[fromVertex][i] != 0) {
-                count++;
-            }
-        }
-        if (count <= 0)
+        if(fromVertex > baseSize - 2 && fromVertex != size*y1 && fromVertex < baseSize * (size-34)  && fromVertex != size*(y1+1)-1)
+        if(neighborCount(fromVertex) == 0){
             isCaptured++;
-        count = 0;
-        for (int i = 0; i < strings.length; i++) {
-            if (strings[toVertex][i] != 0) {
-                count++;
-            }
         }
-        if (count <= 0)
+        if(toVertex > baseSize - 2 && fromVertex != size*y2 && toVertex < baseSize * (size-34)&& toVertex != size*(y1+1)-1 )
+        if(neighborCount(toVertex) == 0){
             isCaptured++;
+        }
         return isCaptured;
     }
 
     public int countDoubleCross() {
         int total = 0;
-        for (int i = 1; i < baseSize; i++) {
+        for (int i = 1; i < size; i++) {
             if(color[i]==0) {
                 int count = neighborCount(i);
                 if (count == 1 && neighborCount(first(i)) == 1) {
@@ -112,7 +105,7 @@ public class StringAndCoins {
 
     private int neighborCount(int fromVertex) {
         int count = 0;
-        for (int j = 1; j < baseSize; j++) {
+        for (int j = 1; j < size; j++) {
             if (strings[fromVertex][j] == 1) {
                 count++;
             }
@@ -120,23 +113,27 @@ public class StringAndCoins {
         return count;
     }
 
-    public int countCycles() {
+    public int countCycles() {//do the cal for toVertex and fromVertex but check to see if it is a fringe
         int total = 0;
-        for (int i = 1; i < baseSize; i++) {
+        for (int i = 1; i < size; i++) {
             if (color[i] != 1) {
+                color[i] = 1;
                 if (neighborCount(i) == 2) {
                     boolean cont = true;
                     int next = i;
                     while (cont) {
                         color[next] = 1;
-                        next = first(next);
-                        if (next == i) {
-                            cont = false;
-                            total++;
-                        }
+                        next = nextUncolor(next);
+                        if (color[next] == 0){
+                            if (next == i) {
+                                cont = false;
+                                total++;
+                            }
+
                         if (neighborCount(next) != 2) {
                             cont = false;
                         }
+                    }
                     }
                 }
             }
@@ -147,7 +144,7 @@ public class StringAndCoins {
 
     public int countOpenChains(){
         int total = 0;
-        for (int i = 1; i < baseSize; i++) {
+        for (int i = 1; i < size; i++) {
             if (color[i] != 1) {
                 color[i] = 1;
                 if(neighborCount(i) >= 3 || neighborCount(i) == 1){
@@ -180,7 +177,7 @@ public class StringAndCoins {
     }
 
     private int nextUncolor(int vertex){
-        for(int curr = first(vertex); curr< this.baseSize; curr = next(vertex,curr)){
+        for(int curr = first(vertex); curr< size; curr = next(vertex,curr)){
             if(color[curr] == 0){
                 return curr;
             }

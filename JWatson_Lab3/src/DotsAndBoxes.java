@@ -45,7 +45,7 @@ public class DotsAndBoxes  {
             stringAndCoins.addBiEdge(sFromVertex,  sToVertex,0);
         }
         //return if the score if any
-        int sco =stringAndCoins.checkCapture(sFromVertex,sToVertex);
+        int sco =stringAndCoins.checkCapture(sFromVertex,sToVertex,y1,y2);
         scores[player] += sco;
         return sco;
     }
@@ -61,7 +61,7 @@ public class DotsAndBoxes  {
             stringAndCoins.addBiEdge(sFromVertex,  sToVertex,0);
         }
         //return if the score if any
-        int sco =stringAndCoins.checkCapture(sFromVertex,sToVertex);
+        int sco =stringAndCoins.checkCapture(sFromVertex,sToVertex,y1,y2);
         scores[player] += sco;
         return sco;
     }
