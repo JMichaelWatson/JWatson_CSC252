@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/JWatson_Lab1/JWatson_Lab1.iml" filepath="$PROJECT_DIR$/JWatson_Lab1/JWatson_Lab1.iml" />
       <module fileurl="file://$PROJECT_DIR$/JWatson_Lab2/JWatson_Lab2.iml" filepath="$PROJECT_DIR$/JWatson_Lab2/JWatson_Lab2.iml" />
       <module fileurl="file://$PROJECT_DIR$/JWatson_Lab3/JWatson_Lab3.iml" filepath="$PROJECT_DIR$/JWatson_Lab3/JWatson_Lab3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JWatson_Lab4/JWatson_Lab4.iml" filepath="$PROJECT_DIR$/JWatson_Lab4/JWatson_Lab4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpellCheckerInClass/SpellCheckerInClass.iml" filepath="$PROJECT_DIR$/SpellCheckerInClass/SpellCheckerInClass.iml" />
     </modules>
   </component>
 </project>
